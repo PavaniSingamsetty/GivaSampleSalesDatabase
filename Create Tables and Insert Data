@@ -40,9 +40,9 @@ VALUES
 
 
 CREATE TABLE Product_Details (
-    SKU TEXT PRIMARY KEY,
+    SKU VARCHAR(50),
     MRP INTEGER,
-    product_name TEXT
+    product_name VARCHAR(50)
 );
 
 INSERT INTO Product_Details (SKU, MRP, product_name)
@@ -72,9 +72,9 @@ VALUES
 
 CREATE TABLE Customer_Details (
     customer_id INTEGER PRIMARY KEY,
-    name TEXT,
-    phone_number TEXT,
-    email TEXT
+    name VARCHAR(50),
+    phone_number VARCHAR(50),
+    email VARCHAR(50)
 );
 
 INSERT INTO Customer_Details (customer_id, name, phone_number, email)
