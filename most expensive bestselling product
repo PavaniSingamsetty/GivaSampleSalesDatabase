@@ -1,0 +1,24 @@
+WITH Product_Sales AS (
+    SELECT
+        TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(s.skus_bought, ',', n.n), ',', -1)) AS SKU
+    FROM
+        Sales_Data s
+    JOIN
+        (SELECT 1 AS n UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4) n
+    ON
+        LENGTH(s.skus_bought) - LENGTH(REPLACE(s.skus_bought, ',', '')) >= n.n - 1
+)
+SELECT
+    p.SKU,
+    p.product_name,
+    p.MRP,
+    COUNT(*) AS sales_count
+FROM
+    Product_Sales ps
+JOIN
+    Product_Details p ON ps.SKU = p.SKU
+GROUP BY
+    p.SKU, p.product_name, p.MRP
+ORDER BY
+    sales_count DESC, p.MRP DESC
+LIMIT 1;
