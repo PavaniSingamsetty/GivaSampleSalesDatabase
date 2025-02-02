@@ -1,0 +1,10 @@
+SELECT DISTINCT c.customer_id, c.name, c.phone_number, c.email
+FROM Sales_Data s
+JOIN Customer_Details c ON s.customer_id = c.customer_id
+WHERE s.skus_bought LIKE '%CR%'
+AND s.customer_id IN (
+    SELECT customer_id
+    FROM Sales_Data
+    GROUP BY customer_id
+    HAVING COUNT(order_id) > 1
+);
