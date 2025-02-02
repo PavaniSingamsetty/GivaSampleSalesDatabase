@@ -32,14 +32,13 @@ VALUES
 (19, 'ST567,CR789', 150.75, 18.00, '2025-02-03', 119, 'Denver', 'online'),
 (20, 'ST123', 80.40, 5.00, '2025-02-04', 120, 'Boston', 'offline');
 
--- Create the Product_Details table
+
 CREATE TABLE Product_Details (
     SKU TEXT PRIMARY KEY,
     MRP INTEGER,
     product_name TEXT
 );
 
--- Insert random product details with MRP between 1000 and 10000 (no decimals)
 INSERT INTO Product_Details (SKU, MRP, product_name)
 VALUES
 ('ST123', 1200, 'Steel Vase'),
@@ -64,7 +63,7 @@ VALUES
 ('CR789', 2600, 'Ceramic Water Fountain'),
 ('ST123', 4200, 'Steel Bookend');
 
--- Create the Customer_Details table
+
 CREATE TABLE Customer_Details (
     customer_id INTEGER PRIMARY KEY,
     name TEXT,
@@ -72,7 +71,6 @@ CREATE TABLE Customer_Details (
     email TEXT
 );
 
--- Insert customer details based on the customer_ids from Sales_Data
 INSERT INTO Customer_Details (customer_id, name, phone_number, email)
 VALUES
 (101, 'John Doe', '123-456-7890', 'john.doe@example.com'),
