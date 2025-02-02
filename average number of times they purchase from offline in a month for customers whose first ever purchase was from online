@@ -1,0 +1,37 @@
+WITH First_Purchase AS (
+    SELECT
+        customer_id,
+        channel_type,
+        ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY order_date) AS purchase_rank
+    FROM
+        Sales_Data
+),
+Online_First_Customers AS (
+    SELECT
+        customer_id
+    FROM
+        First_Purchase
+    WHERE
+        purchase_rank = 1 AND channel_type = 'online'
+),
+Offline_Purchases AS (
+    SELECT
+        s.customer_id,
+        MONTH(s.order_date) AS month,
+        COUNT(*) AS offline_purchases
+    FROM
+        Sales_Data s
+    JOIN
+        Online_First_Customers o ON s.customer_id = o.customer_id
+    WHERE
+        s.channel_type = 'offline'
+    GROUP BY
+        s.customer_id, month
+)
+SELECT
+    customer_id,
+    AVG(offline_purchases) AS avg_offline_purchases_per_month
+FROM
+    Offline_Purchases
+GROUP BY
+    customer_id;
