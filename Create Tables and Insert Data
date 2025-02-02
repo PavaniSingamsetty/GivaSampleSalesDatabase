@@ -1,0 +1,97 @@
+CREATE TABLE Sales_Data (
+    order_id INT PRIMARY KEY,
+    skus_bought VARCHAR(255),
+    price DECIMAL(10, 2),
+    discount DECIMAL(5, 2),
+    order_date DATE,
+    customer_id INT,
+    order_city VARCHAR(100),
+    channel_type ENUM('online', 'offline')
+);
+
+INSERT INTO Sales_Data (order_id, skus_bought, price, discount, order_date, customer_id, order_city, channel_type)
+VALUES
+(1, 'ST123,CR456', 120.50, 10.00, '2025-01-15', 101, 'New York', 'online'),
+(2, 'CR789', 80.00, 5.00, '2025-01-16', 102, 'Los Angeles', 'offline'),
+(3, 'ST234,ST567,CR890', 250.75, 15.00, '2025-01-17', 103, 'Chicago', 'online'),
+(4, 'CR111', 55.20, 10.00, '2025-01-18', 104, 'Houston', 'offline'),
+(5, 'ST678,CR345', 175.30, 20.00, '2025-01-19', 105, 'Phoenix', 'online'),
+(6, 'ST345', 110.50, 5.00, '2025-01-20', 106, 'Philadelphia', 'offline'),
+(7, 'CR678', 90.00, 12.00, '2025-01-21', 107, 'San Antonio', 'online'),
+(8, 'ST890,CR123', 135.60, 18.00, '2025-01-22', 108, 'San Diego', 'offline'),
+(9, 'ST456,ST789', 210.00, 25.00, '2025-01-23', 109, 'Dallas', 'online'),
+(10, 'CR567', 130.00, 8.00, '2025-01-24', 110, 'San Jose', 'offline'),
+(11, 'ST234', 105.40, 5.00, '2025-01-25', 111, 'Austin', 'online'),
+(12, 'ST678,CR890', 160.75, 15.00, '2025-01-26', 112, 'Fort Worth', 'offline'),
+(13, 'CR345', 95.50, 10.00, '2025-01-27', 113, 'Jacksonville', 'online'),
+(14, 'ST123,ST456', 210.00, 20.00, '2025-01-28', 114, 'Columbus', 'offline'),
+(15, 'CR789,ST567', 180.00, 12.00, '2025-01-29', 115, 'Charlotte', 'online'),
+(16, 'ST234', 95.25, 5.00, '2025-01-30', 116, 'Indianapolis', 'offline'),
+(17, 'CR123', 125.60, 10.00, '2025-02-01', 117, 'San Francisco', 'online'),
+(18, 'ST890,CR456', 240.90, 30.00, '2025-02-02', 118, 'Seattle', 'offline'),
+(19, 'ST567,CR789', 150.75, 18.00, '2025-02-03', 119, 'Denver', 'online'),
+(20, 'ST123', 80.40, 5.00, '2025-02-04', 120, 'Boston', 'offline');
+
+-- Create the Product_Details table
+CREATE TABLE Product_Details (
+    SKU TEXT PRIMARY KEY,
+    MRP INTEGER,
+    product_name TEXT
+);
+
+-- Insert random product details with MRP between 1000 and 10000 (no decimals)
+INSERT INTO Product_Details (SKU, MRP, product_name)
+VALUES
+('ST123', 1200, 'Steel Vase'),
+('CR456', 1500, 'Ceramic Pot'),
+('ST234', 2500, 'Steel Lantern'),
+('ST567', 3000, 'Steel Wall Art'),
+('CR890', 1800, 'Ceramic Jar'),
+('CR111', 1100, 'Ceramic Plate'),
+('ST678', 2200, 'Steel Sculpture'),
+('CR345', 1900, 'Ceramic Candle Holder'),
+('ST345', 2800, 'Steel Candle Stand'),
+('CR678', 1700, 'Ceramic Vase'),
+('ST890', 3200, 'Steel Flower Pot'),
+('ST456', 2100, 'Steel Planter'),
+('CR567', 1600, 'Ceramic Bowl'),
+('ST789', 3600, 'Steel Tray'),
+('CR123', 3000, 'Ceramic Table Runner'),
+('ST890', 4000, 'Steel Mirror Frame'),
+('ST234', 2700, 'Steel Clock'),
+('ST678', 3500, 'Steel Trolley'),
+('ST567', 2200, 'Steel Table Lamp'),
+('CR789', 2600, 'Ceramic Water Fountain'),
+('ST123', 4200, 'Steel Bookend');
+
+-- Create the Customer_Details table
+CREATE TABLE Customer_Details (
+    customer_id INTEGER PRIMARY KEY,
+    name TEXT,
+    phone_number TEXT,
+    email TEXT
+);
+
+-- Insert customer details based on the customer_ids from Sales_Data
+INSERT INTO Customer_Details (customer_id, name, phone_number, email)
+VALUES
+(101, 'John Doe', '123-456-7890', 'john.doe@example.com'),
+(102, 'Jane Smith', '234-567-8901', 'jane.smith@example.com'),
+(103, 'Alice Johnson', '345-678-9012', 'alice.johnson@example.com'),
+(104, 'Bob Brown', '456-789-0123', 'bob.brown@example.com'),
+(105, 'Charlie Davis', '567-890-1234', 'charlie.davis@example.com'),
+(106, 'Diana Evans', '678-901-2345', 'diana.evans@example.com'),
+(107, 'Eve Green', '789-012-3456', 'eve.green@example.com'),
+(108, 'Frank Harris', '890-123-4567', 'frank.harris@example.com'),
+(109, 'Grace Lee', '901-234-5678', 'grace.lee@example.com'),
+(110, 'Henry Martin', '012-345-6789', 'henry.martin@example.com'),
+(111, 'Ivy Nelson', '123-456-7891', 'ivy.nelson@example.com'),
+(112, 'Jack O’Connor', '234-567-8902', 'jack.oconnor@example.com'),
+(113, 'Kathy Perez', '345-678-9013', 'kathy.perez@example.com'),
+(114, 'Leo Quinton', '456-789-0124', 'leo.quinton@example.com'),
+(115, 'Mona Roberts', '567-890-1235', 'mona.roberts@example.com'),
+(116, 'Nathan Scott', '678-901-2346', 'nathan.scott@example.com'),
+(117, 'Olivia Thomas', '789-012-3457', 'olivia.thomas@example.com'),
+(118, 'Paul Underwood', '890-123-4568', 'paul.underwood@example.com'),
+(119, 'Quincy Vance', '901-234-5679', 'quincy.vance@example.com'),
+(120, 'Rita Watson', '012-345-6790', 'rita.watson@example.com');
